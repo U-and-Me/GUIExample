@@ -12,6 +12,8 @@ namespace GUIExample
 {
     public partial class Form1 : Form
     {
+
+        GroupBox groupBoxFish;
         public Form1()
         {
             InitializeComponent();
@@ -64,40 +66,101 @@ namespace GUIExample
             Controls.Add(checkBox3);
             Controls.Add(button);
 
+            GroupBox groupBoxPlant = new GroupBox();
+            groupBoxFish = new GroupBox();
+
             RadioButton radio1 = new RadioButton();
             RadioButton radio2 = new RadioButton();
             RadioButton radio3 = new RadioButton();
             Button buttonRadio = new Button();
+
+            RadioButton radio4 = new RadioButton();
+            RadioButton radio5 = new RadioButton();
+            RadioButton radio6 = new RadioButton();
+            Button buttonRadio2 = new Button();
+
+            groupBoxPlant.Text = "작물";
+            groupBoxFish.Text = "물고기";
 
             radio1.Text = "감자";
             radio2.Text = "고구마";
             radio3.Text = "토마토";
             buttonRadio.Text = "클릭";
 
-            radio1.Location = new Point(300, 110);
-            radio2.Location = new Point(300, 140);
-            radio3.Location = new Point(300, 170);
-            buttonRadio.Location = new Point(300, 200);
+            radio4.Text = "광어";
+            radio5.Text = "우럭";
+            radio6.Text = "연어";
+            buttonRadio2.Text = "클릭";
+
+            groupBoxPlant.Size = new Size(120, 200);
+            groupBoxFish.Size = new Size(120, 200);
+
+            groupBoxPlant.Location = new Point(250, 110);
+            groupBoxFish.Location = new Point(400, 110);
+
+            radio1.Location = new Point(30, 30);
+            radio2.Location = new Point(30, 60);
+            radio3.Location = new Point(30, 90);
+            buttonRadio.Location = new Point(30, 130);
+
+            radio4.Location = new Point(30, 30);
+            radio5.Location = new Point(30, 60);
+            radio6.Location = new Point(30, 90);
+            buttonRadio2.Location = new Point(30, 130);
 
             buttonRadio.Click += ButtonRadioClick;
+            buttonRadio2.Click += ButtonRadioClick2;
 
-            Controls.Add(radio1);
-            Controls.Add(radio2);
-            Controls.Add(radio3);
-            Controls.Add(buttonRadio);
+            groupBoxPlant.Controls.Add(radio1);
+            groupBoxPlant.Controls.Add(radio2);
+            groupBoxPlant.Controls.Add(radio3);
+            groupBoxPlant.Controls.Add(buttonRadio);
+
+            groupBoxFish.Controls.Add(radio4);
+            groupBoxFish.Controls.Add(radio5);
+            groupBoxFish.Controls.Add(radio6);
+            groupBoxFish.Controls.Add(buttonRadio2);
+
+            Controls.Add(groupBoxPlant);
+            Controls.Add(groupBoxFish);
         }
 
-        private void ButtonRadioClick(object sender, EventArgs e)
+        private void ButtonRadioClick2(object sender, EventArgs e)
         {
-            foreach(var item in Controls)
+            foreach (var item in groupBoxFish.Controls)
             {
-                if(item is RadioButton)
+                if (item is RadioButton)
                 {
                     RadioButton radioButton = (RadioButton)item;
                     if (radioButton.Checked)
                     {
                         MessageBox.Show(radioButton.Text);
                     }
+                 }
+            }
+        }
+
+        private void ButtonRadioClick(object sender, EventArgs e)
+        {
+            foreach (var outerItem in Controls)
+            {
+                if (outerItem is GroupBox) {
+                    GroupBox groupBox = (GroupBox)outerItem;
+                    if(groupBox.Text == "작물")
+                    {
+                        foreach(var item in groupBox.Controls)
+                        {
+                            if(item is RadioButton)
+                            {
+                                RadioButton radioButton = (RadioButton)item;
+                                if (radioButton.Checked)
+                                {
+                                    MessageBox.Show(radioButton.Text);
+                                }
+                            }
+                        }
+                    }
+                    
                 }
             }
         }
