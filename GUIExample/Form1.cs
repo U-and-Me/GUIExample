@@ -63,6 +63,43 @@ namespace GUIExample
             Controls.Add(checkBox2);
             Controls.Add(checkBox3);
             Controls.Add(button);
+
+            RadioButton radio1 = new RadioButton();
+            RadioButton radio2 = new RadioButton();
+            RadioButton radio3 = new RadioButton();
+            Button buttonRadio = new Button();
+
+            radio1.Text = "감자";
+            radio2.Text = "고구마";
+            radio3.Text = "토마토";
+            buttonRadio.Text = "클릭";
+
+            radio1.Location = new Point(300, 110);
+            radio2.Location = new Point(300, 140);
+            radio3.Location = new Point(300, 170);
+            buttonRadio.Location = new Point(300, 200);
+
+            buttonRadio.Click += ButtonRadioClick;
+
+            Controls.Add(radio1);
+            Controls.Add(radio2);
+            Controls.Add(radio3);
+            Controls.Add(buttonRadio);
+        }
+
+        private void ButtonRadioClick(object sender, EventArgs e)
+        {
+            foreach(var item in Controls)
+            {
+                if(item is RadioButton)
+                {
+                    RadioButton radioButton = (RadioButton)item;
+                    if (radioButton.Checked)
+                    {
+                        MessageBox.Show(radioButton.Text);
+                    }
+                }
+            }
         }
 
         private void ButtonClick(object sender, EventArgs e)
